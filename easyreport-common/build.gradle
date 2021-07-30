@@ -3,10 +3,10 @@
  */
 
 dependencies {
-    implementation 'com.fasterxml.jackson.core:jackson-annotations:2.9.0'
-    implementation 'org.apache.commons:commons-lang3:3.7'
-    implementation 'com.alibaba:fastjson:1.2.47'
-    implementation project(':easyreport-support')
+    api 'com.fasterxml.jackson.core:jackson-annotations:2.9.0'
+    api 'org.apache.commons:commons-lang3:3.7'
+    api 'com.alibaba:fastjson:1.2.47'
+    api project(':easyreport-support')
     testImplementation 'org.springframework.boot:spring-boot-starter-test:2.0.4.RELEASE'
 }
 

@@ -1,5 +1,5 @@
 server:
-  port: @server.port@
+  port: '@server.port@'
   error:
     whitelabel:
       enabled: false
@@ -60,13 +60,13 @@ spring:
 #
 # logging
 #
-logging:
-  config: @logging.config@
-  path: @logging.path@
-  level:
-    default: @logging.level.default@
-    ucenter: @logging.level.easyreport@
-    mybatis: @logging.level.mybatis@
+#logging:
+#  config: '@logging.config@'
+#  path: '@logging.path@'
+#  level:
+#    default: '@logging.level.default@'
+#    ucenter: '@logging.level.easyreport@'
+#    mybatis: '@logging.level.mybatis@'
 #
 # management
 #

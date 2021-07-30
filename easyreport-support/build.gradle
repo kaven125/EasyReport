@@ -3,14 +3,14 @@
  */
 
 dependencies {
-    implementation 'org.springframework.boot:spring-boot-starter-web:2.0.4.RELEASE'
-    implementation 'org.springframework.boot:spring-boot-starter-aop:2.0.4.RELEASE'
-    implementation 'org.projectlombok:lombok:1.16.22'
-    implementation 'org.slf4j:slf4j-api:1.7.25'
-    implementation 'org.apache.commons:commons-collections4:4.1'
-    implementation 'org.apache.commons:commons-lang3:3.7'
-    implementation 'com.google.guava:guava:18.0'
-    implementation 'com.alibaba:fastjson:1.2.47'
-    implementation 'org.hibernate.validator:hibernate-validator-annotation-processor:6.0.10.Final'
+    api 'org.springframework.boot:spring-boot-starter-web:2.0.4.RELEASE'
+    api 'org.springframework.boot:spring-boot-starter-aop:2.0.4.RELEASE'
+    lombokClassPath 'org.projectlombok:lombok:1.18.20'
+    api 'org.slf4j:slf4j-api:1.7.25'
+    api 'org.apache.commons:commons-collections4:4.1'
+    api 'org.apache.commons:commons-lang3:3.7'
+    api 'com.google.guava:guava:18.0'
+    api 'com.alibaba:fastjson:1.2.47'
+    api 'org.hibernate.validator:hibernate-validator-annotation-processor:6.0.10.Final'
     testImplementation 'org.springframework.boot:spring-boot-starter-test:2.0.4.RELEASE'
 }

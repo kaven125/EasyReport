@@ -9,6 +9,8 @@ EasyReport是一個簡單易用的Web報表工具,它的主要功能是把SQL語
 
 * mvn -DskipTests package
 * mvn spring-boot:run -pl easyreport-web 
+* ./gradlew build -x test
+* ./gradlew bootRun -pl easyreport-web
 
 然後就可以通過瀏覽器localhost:8080查看
 
