@@ -1,27 +1,27 @@
-EasyReport(ver2.0) 用户操作手册
+EasyReport(ver2.0) 用戶操作手冊
 ================================================
 
-##   目录
+##   目錄
 
-* [开发环境(Development Environment)](#user-content-1开发环境development-environment)
-* [安装与部署(Installation & Deployment)](#user-content-2安装与部署installation--deployment)
-	* [从源代码安装(From Source Code)](#user-content-21-从源代码安装from-source-code)
-	* [从发布包安装(From Release Packages)](#user-content-22-从发布包安装from-release-packages)
-	* [定时任务程序部署(Scheduled Task Deamon)](#user-content-23-定时任务程序部署scheduled-task-deamon)
-* [使用说明(User Guide)](#user-content-3使用说明user-guide)
-	* [预备知识(Prerequisites)](#user-content-31-预备知识prerequisites)
-	* [数据源设置(DataSource Configuration)](#user-content-32-数据源设置datasource-configuration)
+* [開發環境(Development Environment)](#user-content-1開發環境development-environment)
+* [安裝與部署(Installation & Deployment)](#user-content-2安裝與部署installation--deployment)
+	* [從源代碼安裝(From Source Code)](#user-content-21-從源代碼安裝from-source-code)
+	* [從發布包安裝(From Release Packages)](#user-content-22-從發布包安裝from-release-packages)
+	* [定時任務程序部署(Scheduled Task Deamon)](#user-content-23-定時任務程序部署scheduled-task-deamon)
+* [使用說明(User Guide)](#user-content-3使用說明user-guide)
+	* [預備知識(Prerequisites)](#user-content-31-預備知識prerequisites)
+	* [數據源設置(DataSource Configuration)](#user-content-32-數據源設置datasource-configuration)
 	* [配置管理(Configuration)](#user-content-33-配置管理configuration)
-	* [报表设计(Reporting Design)](#user-content-34-报表设计reporting-design)
-	* [定时任务配置管理(Scheduled Task Configruation)](#user-content-35-定时任务配置管理scheduled-task-configruation)
+	* [報表設計(Reporting Design)](#user-content-34-報表設計reporting-design)
+	* [定時任務配置管理(Scheduled Task Configruation)](#user-content-35-定時任務配置管理scheduled-task-configruation)
 	* [示例(Examples)](#user-content-36-示例examples)
-	* [相关参考(Referrence links)](#user-content-37-相关参考referrence-links)
-* [开发者(For Developers)](#user-content-4开发者for-developers)
-	* [报表引擎接口(Reporting Engine API)](#user-content-41-报表引擎接口reporting-engine-api)
-	* [自定义报表开发(Customsized Reporting Development)](#user-content-42-自定义报表开发customsized-reporting-development)
-* [常见问题(FAQ)](#user-content-5常见问题faq)
+	* [相關參考(Referrence links)](#user-content-37-相關參考referrence-links)
+* [開發者(For Developers)](#user-content-4開發者for-developers)
+	* [報表引擎接口(Reporting Engine API)](#user-content-41-報表引擎接口reporting-engine-api)
+	* [自定義報表開發(Customsized Reporting Development)](#user-content-42-自定義報表開發customsized-reporting-development)
+* [常見問題(FAQ)](#user-content-5常見問題faq)
 
-## 1.开发环境(Development Environment)
+## 1.開發環境(Development Environment)
 * [jdk1.8][]
 * [maven3][]
 * [idea][] or [eclipsejee][]
@@ -29,198 +29,198 @@ EasyReport(ver2.0) 用户操作手册
 * [tomcat8+][]
 * [MySQL5+][]
 
-## 2.安装与部署(Installation & Deployment)
-系统默认登录用户:**admin** 密码:**123456**
+## 2.安裝與部署(Installation & Deployment)
+系統默認登錄用戶:**admin** 密碼:**123456**
 
-### 2.1 从源代码安装(From Source Code)
-首先确定安装好[jdk1.8][]与[maven3][]，并配置好maven仓库，然后按如下步骤操作：
+### 2.1 從源代碼安裝(From Source Code)
+首先確定安裝好[jdk1.8][]與[maven3][]，並配置好maven倉庫，然後按如下步驟操作：
 * step1:git clone https://github.com/xianrendzw/EasyReport.git
 * step2:mvn -DskipTests package
-* step3:经过step2, 如果没有报错，mvn spring-boot:run -pl easyreport-web 启动程序，然后就可以通过浏览器localhost:8080查看
+* step3:經過step2, 如果沒有報錯，mvn spring-boot:run -pl easyreport-web 啟動程序，然後就可以通過瀏覽器localhost:8080查看
 
-### 2.2 定时任务程序部署(Scheduled Task Deamon)
-有时需要把报表定时（每天、每月，每季度等）以邮件形式发布给相关的人员，因此需要定时任务调度程序，常用的调度程序也很多（linux:at,crontab;windows:计划任务）,本工具实现一个简单的调度程序。
-**说明：**该程序是可选的，如果不需要定时把报表以邮件方式发布，则可不部署该程序。  具体安装与部署步骤如下:
+### 2.2 定時任務程序部署(Scheduled Task Deamon)
+有時需要把報表定時（每天、每月，每季度等）以郵件形式發布給相關的人員，因此需要定時任務調度程序，常用的調度程序也很多（linux:at,crontab;windows:計劃任務）,本工具實現一個簡單的調度程序。
+**說明：**該程序是可選的，如果不需要定時把報表以郵件方式發布，則可不部署該程序。  具體安裝與部署步驟如下:
 * step1:cd yourgitrepository/EasyReport/easyreport-scheduler
-* step2:修改 src\main\resources\${env}\resource.properties 数据库连接，用户与密码
-* step3:mvn clean package -Dmaven.test.skip=true -P${env} (${env}变量说明:dev表示开发环境,prod表示生产，test表示测试)
-* step4:经过step3之后会在target目录生成easyreport-scheduler.jar文件。然后在linux中执行如下shell命令:
+* step2:修改 src\main\resources\${env}\resource.properties 數據庫連接，用戶與密碼
+* step3:mvn clean package -Dmaven.test.skip=true -P${env} (${env}變量說明:dev表示開發環境,prod表示生產，test表示測試)
+* step4:經過step3之後會在target目錄生成easyreport-scheduler.jar文件。然後在linux中執行如下shell命令:
 ```shell
 nohup java -jar easyreport-scheduler.jar >easyreport2.log 2>&1 &
 ```
 
-## 3.使用说明(User Guide)
+## 3.使用說明(User Guide)
 
-### 3.1 预备知识(Prerequisites)
-简单的说，报表就是用表格、图表等格式来动态显示数据。它是数据可视化的重要部分。尤其在当今大数据泛滥的时代，到处都需要各种各样的报表。在使用该工具之前您应该先了解一下数据仓库、维度、度量、[事实表](http://www.cnblogs.com/wufengtinghai/archive/2013/05/04/3060265.html)等相关概念，这将会对你制作报表有一定的帮助。
+### 3.1 預備知識(Prerequisites)
+簡單的說，報表就是用表格、圖表等格式來動態顯示數據。它是數據可視化的重要部分。尤其在當今大數據泛濫的時代，到處都需要各種各樣的報表。在使用該工具之前您應該先瞭解一下數據倉庫、維度、度量、[事實表](http://www.cnblogs.com/wufengtinghai/archive/2013/05/04/3060265.html)等相關概念，這將會對你製作報表有一定的幫助。
 
-本工具只是简单的从数据库(MySQL,Oracle,SQLServer,HBase等)中的事实表读取数据，并转换成HTML表格形式展示。不支持CUBE、钻取、切片等复杂OLAP相关的功能。
+本工具只是簡單的從數據庫(MySQL,Oracle,SQLServer,HBase等)中的事實表讀取數據，並轉換成HTML表格形式展示。不支持CUBE、鑽取、切片等復雜OLAP相關的功能。
 
-### 3.2 数据源设置(DataSource Configuration)
-在制作报表前需要先设置数据源，本工具只支持在单一数据源（即数据库）生成报表。![ds-1][]
+### 3.2 數據源設置(DataSource Configuration)
+在製作報表前需要先設置數據源，本工具只支持在單一數據源（即數據庫）生成報表。![ds-1][]
 
 ### 3.3 配置管理(Configuration)
-配置管理主要于在制作报表时自动匹配一些常用的列名对应的中文描述。如:dt,date（日期）、title(标题）等。![config-1][]
+配置管理主要於在製作報表時自動匹配一些常用的列名對應的中文描述。如:dt,date（日期）、title(標題）等。![config-1][]
 
-### 3.4 报表设计(Reporting Design)
-通常，只要把数据源配置成功就可以开始报表设计了，报表设计主要分两个步骤：基本设置与查询参数设置。且必须先把基本设置保存后方可进行查询参数设置 ，查询参数设置是可选的，主要看报表设计者的意图。
+### 3.4 報表設計(Reporting Design)
+通常，只要把數據源配置成功就可以開始報表設計了，報表設計主要分兩個步驟：基本設置與查詢參數設置。且必須先把基本設置保存後方可進行查詢參數設置 ，查詢參數設置是可選的，主要看報表設計者的意圖。
 
-#### 3.4.1 基本设置(Basic Settings)
+#### 3.4.1 基本設置(Basic Settings)
 ![rp-1][]
-报表的基本设置由4部分组成(如上图所示）：**报表树型列表、报表基本属性、报表SQL查询语句、报表元数据列配置**。
-在设计报表之前，先简单介绍几个名词，我们从数据仓库概念了解到维度与度量这两个概念，事实上一条SQL语句查询的结果就是一张二维表格，即由行与列组成的表格，在统计分析时，我们把有些列称为维度列，有些列称为度量列。有时事实表里有好几个维度与度量列，但是SQL查询结果只能是二维表格，它不能把维度层次化，展示方式固定而不能灵活变动，这样在观察与分析数据时多有不便，因此一些报表工具就解决了这些问题。本工具把事实表中的维度列与度量列进行再次划分如下表所示：
+報表的基本設置由4部分組成(如上圖所示）：**報表樹型列表、報表基本屬性、報表SQL查詢語句、報表元數據列配置**。
+在設計報表之前，先簡單介紹幾個名詞，我們從數據倉庫概念了解到維度與度量這兩個概念，事實上一條SQL語句查詢的結果就是一張二維表格，即由行與列組成的表格，在統計分析時，我們把有些列稱為維度列，有些列稱為度量列。有時事實表裡有好幾個維度與度量列，但是SQL查詢結果只能是二維表格，它不能把維度層次化，展示方式固定而不能靈活變動，這樣在觀察與分析數據時多有不便，因此一些報表工具就解決了這些問題。本工具把事實表中的維度列與度量列進行再次劃分如下表所示：
 
-类型      | 子类型
+類型      | 子類型
 ----- | ------
-维度列  | 布局维度列、简称布局列
-      | 一般维度列、简称维度列
-度量列  | 统计列
-      | 计算列
+維度列  | 佈局維度列、簡稱佈局列
+      | 一般維度列、簡稱維度列
+度量列  | 統計列
+      | 計算列
 
-1. 布局列主要用于报表展示方式上，如果布局列为横向展示，则报表在绘制时会把布局列的内容绘制表报表表头，维度列的内容绘制报表表体的左边;如果布局列为纵向展示，则报表在绘制时会把布局列的内容绘制表报表表体的左边，维度列的内容绘制报表表头。
+1. 佈局列主要用於報表展示方式上，如果佈局列為橫向展示，則報表在繪制時會把佈局列的內容繪製表報表表頭，維度列的內容繪制報表表體的左邊;如果佈局列為縱向展示，則報表在繪制時會把佈局列的內容繪製表報表表體的左邊，維度列的內容繪制報表表頭。
 
-2. 计算列是根据SQL查询结果中列的值再根据其配置的计算表达式动态运算出来的，它不存在于SQL语句或事实表中,其中使用的表达式引擎为[aviator][]。
+2. 計算列是根據SQL查詢結果中列的值再根據其配置的計算表達式動態運算出來的，它不存在於SQL語句或事實表中,其中使用的表達式引擎為[aviator][]。
 
-了解了上述基本知识后，我们来看看一张报表的主要设计流程:
-**1.创建报表树型目录列表**
+瞭解了上述基本知識後，我們來看看一張報表的主要設計流程:
+**1.創建報表樹型目錄列表**
 ![rp-2][]
-**2.点击1新建根节点，也可以在树列表中右键创建子节点**
+**2.點擊1新建根節點，也可以在樹列表中右鍵創建子節點**
 ![rp-3][]
-**3.选择指定的目录,设置基本信息，如报表名称，数据源，布局与统计列展示方式**
-**4.输入报表SQL查询语句**
-**5.执行SQL查询语句并获取报表的列信息**
-**6.配置报表的列**
-**7.新增并保存基本设置信息到数据库**
+**3.選擇指定的目錄,設置基本信息，如報表名稱，數據源，佈局與統計列展示方式**
+**4.輸入報表SQL查詢語句**
+**5.執行SQL查詢語句並獲取報表的列信息**
+**6.配置報表的列**
+**7.新增並保存基本設置信息到數據庫**
 ![rp-4][]
-新增成功后，就可以双击树列表中报表名称节点或点击报表预览按钮预览报表。如觉得报表展示的不够友好，可以通过修改布局列与统计列的展示方式来改变报表显示。
+新增成功後，就可以雙擊樹列表中報表名稱節點或點擊報表預覽按鈕預覽報表。如覺得報表展示的不夠友好，可以通過修改佈局列與統計列的展示方式來改變報表顯示。
 ![rp-5][]
-上图是日期为布局列且横向显示的报表预览结果。我们可以修改一下相关配置让报表展示更直观些。
+上圖是日期為佈局列且橫向顯示的報表預覽結果。我們可以修改一下相關配置讓報表展示更直觀些。
 ![rp-6][]
-由于列名dt已经在配置管理设置了默认标题，因此在执行SQL后会自动匹配它的标题，您也可以把其他的列名增加配置管理项中，这样下次设计报表时就会自动匹配默认标题。现在看修改后报表展示。
+由於列名dt已經在配置管理設置了默認標題，因此在執行SQL後會自動匹配它的標題，您也可以把其他的列名增加配置管理項中，這樣下次設計報表時就會自動匹配默認標題。現在看修改後報表展示。
 ![rp-7][]
 
-#### 3.4.2 查询参数(Query Parameter)
-有时候报表需要根据指定条件动态生成，如要查看不同城市空气质量情况，这个时候，我就需要创建一个查询参数变量。
+#### 3.4.2 查詢參數(Query Parameter)
+有時候報表需要根據指定條件動態生成，如要查看不同城市空氣質量情況，這個時候，我就需要創建一個查詢參數變量。
 ![rp-8][]
-其中表单控件用于报表查询参数显示形式，主要有下拉单选框(select)、下单多选框(select mul)、复选框(checkbox)及文本框(textbox)四种。下图1处为查询参数列表。
+其中表單控件用於報表查詢參數顯示形式，主要有下拉單選框(select)、下單多選框(select mul)、復選框(checkbox)及文本框(textbox)四種。下圖1處為查詢參數列表。
 ![rp-9][]
-当查询参的表单控件为下拉单选或多选时，内容来源有两种不同的形式。
+當查詢參的表單控件為下拉單選或多選時，內容來源有兩種不同的形式。
 
-内容来源 | 内容 | 备注
+內容來源 | 內容 | 備注
 -------- | ---- | ----
-SQL语句  | select col1 as name,col2 as text from table ... | 只包含两列且列名必须为**name**与**text**，name列的值对应下拉框的value属性，text列的值对应下拉框的text属性
-文本字符串 | name1,text1\|name2,text2\|... 或name1\|name2\|... | 多个值必须用’\|’分隔，如果name与text值相同则只选择一个并用’\|’分开也可
+SQL語句  | select col1 as name,col2 as text from table ... | 只包含兩列且列名必須為**name**與**text**，name列的值對應下拉框的value屬性，text列的值對應下拉框的text屬性
+文本字符串 | name1,text1\|name2,text2\|... 或name1\|name2\|... | 多個值必須用’\|’分隔，如果name與text值相同則只選擇一個並用’\|’分開也可
 
-#### 3.4.3 内置变量与函数(Build-in variables & functions)
+#### 3.4.3 內置變量與函數(Build-in variables & functions)
 
-有些常用的查询参数不需要用户每次都创建，因此集成在工具内，这些参数变量称为**内置变量**。
+有些常用的查詢參數不需要用戶每次都創建，因此集成在工具內，這些參數變量稱為**內置變量**。
 
-有些报表的SQL语句很复杂，有时需要根据参数动态生成或需要用模板引擎([velocity][])生成，因此需要一些能在模板引擎中应用的函数，这些函数称为**内置函数**。
+有些報表的SQL語句很復雜，有時需要根據參數動態生成或需要用模板引擎([velocity][])生成，因此需要一些能在模板引擎中應用的函數，這些函數稱為**內置函數**。
 
-1.内置变量(区分大小写）
+1.內置變量(區分大小寫）
 
-变量名 | 说明 | 返回值说明
+變量名 | 說明 | 返回值說明
 -----  | ---- | --------
-startTime|开始日期|2015-02-04(默认结束日期的前七天，这个可以由报表基本设置的显示天数修改)
-endTime|结束日期|2015-02-10（默认为当前天）
-intStartTime|整型开始日期|20150204
-intEndTime|整型结束日期|20150210
-utcStartTime|UTC开始日期|2015-02-04（UTC日期，中国为UTC+8区）
-utcEndTime|UTC结束日期|2015-02-10（UTC日期）
-utcIntStartTime|UTC整型开始日期|20150204
-utcIntEndTime|UTC整型结束日期|20150204
+startTime|開始日期|2015-02-04(默認結束日期的前七天，這個可以由報表基本設置的顯示天數修改)
+endTime|結束日期|2015-02-10（默認為當前天）
+intStartTime|整型開始日期|20150204
+intEndTime|整型結束日期|20150210
+utcStartTime|UTC開始日期|2015-02-04（UTC日期，中國為UTC+8區）
+utcEndTime|UTC結束日期|2015-02-10（UTC日期）
+utcIntStartTime|UTC整型開始日期|20150204
+utcIntEndTime|UTC整型結束日期|20150204
 
-2.内置函数
+2.內置函數
 
-* 日期函数
+* 日期函數
 ![rp-10][]
-* 字符串函数，请参考[org.apache.commons.lang3.StringUtils][]类
+* 字符串函數，請參考[org.apache.commons.lang3.StringUtils][]類
 
-#### 3.4.4 图表显示（Charting)
+#### 3.4.4 圖表顯示（Charting)
 ![rp-11][]
-点击报表的图示展示按钮，出现如下界面：
+點擊報表的圖示展示按鈕，出現如下界面：
 ![rp-12][]
-如果要查看多个城市也可以通过对比来显示：
+如果要查看多個城市也可以通過對比來顯示：
 ![rp-13][]
-如果统计列只有一列时，图表显示就可以支持二个维度同时全部展示：
+如果統計列只有一列時，圖表顯示就可以支持二個維度同時全部展示：
 ![rp-14][]
 
-### 3.5 定时任务配置管理(Scheduled Task Configruation)
+### 3.5 定時任務配置管理(Scheduled Task Configruation)
 
 
 ### 3.6 示例(Examples)
 
-示例中的所有数据来源于:[pm25.in][]、[aqistudy][],如果您需要运行示例中的报表，需求在mysql中创建名为**china_weather_air**的数据库，
-然后解压yourgitrepository/EasyReport/docs/db/mysql.zip,并执行china_weather_air_mysql.sql创建表结构与导入初始数据。
+示例中的所有數據來源於:[pm25.in][]、[aqistudy][],如果您需要運行示例中的報表，需求在mysql中創建名為**china_weather_air**的數據庫，
+然後解壓yourgitrepository/EasyReport/docs/db/mysql.zip,並執行china_weather_air_mysql.sql創建表結構與導入初始數據。
 
-1. 最简单报表,直接对应数据库二维表结构
+1. 最簡單報表,直接對應數據庫二維表結構
 配置：
 ![ex-src-1][]
-报表：
+報表：
 ![ex-1][]
-2. 带内置变量与查询参数的报表
+2. 帶內置變量與查詢參數的報表
 配置：
 ![ex-src-2][]
-查询参数：
+查詢參數：
 ![ex-param-2][]
-报表：
-	a. 布局列横向，统计列横向
+報表：
+	a. 佈局列橫向，統計列橫向
 ![ex-2-1][]
-	b. 布局列纵向，统计列横向
+	b. 佈局列縱向，統計列橫向
 ![ex-2-2][]
-	c. 布局列横向，统计列纵向
+	c. 佈局列橫向，統計列縱向
 ![ex-2-3][]
-	d. 布局列纵向，统计列纵向
+	d. 佈局列縱向，統計列縱向
 ![ex-2-4][]
-3. 多布局列报表
+3. 多佈局列報表
 配置：
 ![ex-src-3][]
-报表：
-	a. 布局列横向，统计列横向
+報表：
+	a. 佈局列橫向，統計列橫向
 ![ex-3-1][]
-	b. 布局列纵向，统计列横向
+	b. 佈局列縱向，統計列橫向
 ![ex-3-2][]
-	c. 布局列横向，统计列纵向
+	c. 佈局列橫向，統計列縱向
 ![ex-3-3][]
-	d. 布局列纵向，统计列纵向
+	d. 佈局列縱向，統計列縱向
 ![ex-3-4][]
-4. 统计列可选报表
+4. 統計列可選報表
 配置：
 ![ex-src-4][]
-报表：
+報表：
 ![ex-4-1][]
-5. 报表列的排序
+5. 報表列的排序
 配置：
 ![ex-src-5][]
-报表：
+報表：
 ![ex-5][]
-6. 按百分比格式显示的列
+6. 按百分比格式顯示的列
 配置：
 ![ex-src-6][]
-报表：
+報表：
 ![ex-6][]
-7. 合并报表左边相同维度列
-合并前：
+7. 合並報表左邊相同維度列
+合並前：
 ![ex-7-2][]
-合并后：
+合並後：
 ![ex-7-1][]
 
-### 3.7 相关参考(Referrence Links)
+### 3.7 相關參考(Referrence Links)
 
-* 报表SQL中使用的模板引擎:[velocity][]
-* 计算列中使用的表达式引擎:[aviator][]、[aviator-doc][]
-* 所有示例中的数据来源:[pm25.in][]、[aqistudy][]
-* 图表控件:[echarts][]、[highcharts][]
-* 前端报表表格及排序相关js插件：[tablesorter][]、[DataTables][]
+* 報表SQL中使用的模板引擎:[velocity][]
+* 計算列中使用的表達式引擎:[aviator][]、[aviator-doc][]
+* 所有示例中的數據來源:[pm25.in][]、[aqistudy][]
+* 圖表控件:[echarts][]、[highcharts][]
+* 前端報表表格及排序相關js插件：[tablesorter][]、[DataTables][]
 
-## 4.开发者(For Developers)
+## 4.開發者(For Developers)
 
-该系统总体架构图如下:
+該系統總體架構圖如下:
 ![dev-1][]
 
-### 4.1 报表引擎接口(Reporting Engine API)
-### 4.2 自定义报表开发(Customsized Reporting Development)
-## 5.常见问题(FAQ)
+### 4.1 報表引擎接口(Reporting Engine API)
+### 4.2 自定義報表開發(Customsized Reporting Development)
+## 5.常見問題(FAQ)
 
 [jdk1.8]: http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html
 [jre1.8]: http://www.oracle.com/technetwork/java/javase/downloads/jre8-downloads-2133155.html
@@ -232,7 +232,7 @@ utcIntEndTime|UTC整型结束日期|20150204
 [MySQL5+]: http://dev.mysql.com/downloads/mysql/
 [velocity]: http://velocity.apache.org/engine/1.7/user-guide.html
 [aviator]: https://code.google.com/p/aviator/wiki/User_Guide_zh
-[aviator-doc]: https://raw.githubusercontent.com/xianrendzw/EasyReport/master/docs/assets/files/Aviator-2.3.0用户指南.pdf
+[aviator-doc]: https://raw.githubusercontent.com/xianrendzw/EasyReport/master/docs/assets/files/Aviator-2.3.0用戶指南.pdf
 [org.apache.commons.lang3.StringUtils]: http://commons.apache.org/proper/commons-lang/javadocs/api-release/org/apache/commons/lang3/StringUtils.html
 [pm25.in]: http://www.pm25.in
 [aqistudy]: http://aqistudy.sinaapp.com/historydata/index.php
@@ -280,3 +280,4 @@ utcIntEndTime|UTC整型结束日期|20150204
 [ex-7-1]: https://raw.githubusercontent.com/xianrendzw/EasyReport/master/docs/assets/imgs/ex-7-1.png
 [ex-7-2]: https://raw.githubusercontent.com/xianrendzw/EasyReport/master/docs/assets/imgs/ex-7-2.png
 [mysql.zip]: https://github.com/xianrendzw/EasyReport/blob/master/docs/db/mysql.zip?raw=true
+
