@@ -35,8 +35,7 @@ EasyReport是一个简单易用的Web报表工具,它的主要功能是把SQL语
 ## 捐助
 您的热情,我的动力!开源是一种精神,也是一种生活...
 
-![支付宝][]
 
 [入门手册]: https://github.com/xianrendzw/EasyReport/blob/master/docs/manual/user-guide.md
 [用户参考]: https://github.com/xianrendzw/EasyReport/blob/master/docs/manual/version2_0.md
-[支付宝]: https://raw.githubusercontent.com/xianrendzw/EasyReport/master/docs/assets/imgs/alipay-code.png
+
