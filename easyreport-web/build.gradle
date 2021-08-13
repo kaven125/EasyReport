@@ -58,6 +58,7 @@ dependencies {
     testImplementation 'org.powermock:powermock-api-mockito:1.6.5'
     testImplementation 'com.github.stefanbirkner:system-rules:1.16.0'
     testImplementation 'com.jayway.restassured:rest-assured:2.9.0'
+    testImplementation('org.junit.jupiter:junit-jupiter:5.7.2')
 }
 
 description = 'easyreport-web'
